@@ -1,0 +1,8 @@
+{
+  "generator-gitignore-io": {
+    "options": [
+      "macos",
+      "windows"
+    ]
+  }
+}
