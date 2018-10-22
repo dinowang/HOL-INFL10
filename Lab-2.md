@@ -43,9 +43,9 @@
          }
     ```
 
-    > 這邊使用 MemoryStorage, 但在 web apps 中建議用別的儲存機制 (ex: Microsoft.Bot.Builder.Azure.AzureBlobStorage) 達成持久狀態儲存
+    > 這邊使用 MemoryStorage, 但在 web apps 中建議用別的儲存機制 (ex: Microsoft.Bot.Builder.Azure.AzureBlobStorage) 達成持久狀態儲存  
     > AddSingleton: 一旦實例化就不會回收, 運行期間都用同一個  
-    > AddTransient: 每次注入都會產生一個實例
+    > AddTransient: 每次注入都會產生一個實例  
     > AddScoped: 每次的請求都會只產生一個實例, 不同次的Request都會用不同的
 
 3. 在 `Startup.cs` 中註冊 `StateAccessors`
@@ -57,7 +57,7 @@
     }
     ```
 
-4. 修改實作上一節中實作的 `DemoBot`, 將 `StateAccessors` 注入
+4. 修改實作上一節中實作的 `DemoBot.cs`, 將 `StateAccessors` 注入
     ```csharp
     private StateAccessors _accessors;
  
@@ -67,7 +67,7 @@
     }
     ```
 
-5. 修改 `DemoBot` 的 `OnTurnAsync` 方法, 讓機器人在接收到訊息時, 取得這是對話中第幾個訊息, 並且 +1 後放回
+5. 修改 `DemoBot.cs` 的 `OnTurnAsync` 方法, 讓機器人在接收到訊息時, 取得這是對話中第幾個訊息, 並且 +1 後放回
     ```csharp
     public async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
     {
