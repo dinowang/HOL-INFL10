@@ -1,3 +1,5 @@
+[Back to README](README.md)
+
 # Lab-4. 說好的 AI 在哪裡? LUIS
    
 ## 目的
@@ -28,9 +30,9 @@
 7. 實作 `KKBoxDialog`  
    [KKBoxDialog](code/KKBoxdialog.cs)
    
-    > 都回傳狀態為 `DialogTurnStatus.Waiting` 的原因是, 讓 Bot 維持在 `KKBoxDialog` 中
+   > 都回傳狀態為 `DialogTurnStatus.Waiting` 的原因是, 讓 Bot 維持在 `KKBoxDialog` 中
 
-8. 在 `Startup.cs` 中, 驗證 `BotConfiguration` 是否有 LuisService, 並且註冊Service
+8. 在 `Startup.cs` 中, 驗證 `BotConfiguration` 是否有 LuisService, 並且註冊 Service
     ```csharp
     using Microsoft.Bot.Builder.AI.Luis;
 
@@ -51,16 +53,13 @@
     }
     ```
 
-9. 修改 `DemoBot.cs`, 注入 `KKBoxDialog` 並且將 `KKBoxDialog` 加入 `DialogSet`
+9.  修改 `DemoBot.cs`, 注入 `KKBoxDialog` 並且將 `KKBoxDialog` 加入 `DialogSet`
     ```csharp
-    public DemoBot (StateAccessors accessors, 
-        WelcomeDialog welcomeDialog, 
-        KKBoxDialog kkBoxDialog)
+    public DemoBot (StateAccessors accessors, WelcomeDialog welcomeDialog, KKBoxDialog kkBoxDialog)
     {
         this._accessors = accessors;
-        Dialogs = new DialogSet (accessors.DialogStateAccessor);
-        this.Dialogs.Add (welcomeDialog)
-            .Add (kkBoxDialog);
+        Dialogs = new DialogSet(accessors.DialogStateAccessor);
+        this.Dialogs.Add(welcomeDialog).Add(kkBoxDialog);
     }
     ```
 
@@ -74,7 +73,7 @@
     }
     else if (dialogResult.Status == DialogTurnStatus.Empty)
     {
-        await dc.BeginDialogAsync (nameof (KKBoxDialog));
+        await dc.BeginDialogAsync(nameof(KKBoxDialog));
     }
     ```
 
@@ -121,59 +120,47 @@
 
 15. 修改 `KKBoxDialog` , 判斷使用者意圖, 根據使用者意圖決定動作
     
-    1. 建構子增加 `KKBOXAPI` 參數, 並且放到屬性中
         ```csharp
-        public KKBoxDialog (LuisRecognizer luisRecognizer, KKBOXAPI api) : base (nameof (KKBoxDialog))
-        {
-            LuisRecognizer = luisRecognizer;
-            Api = api;
-        }
-
-        public KKBOXAPI Api { get; }
-        ```
-
-    2. 增加 `GetSearchResultAsync` 跟 `GetChartPlayListAsync` 兩個方法, 可以用來搜尋跟取得熱門榜資訊
-        ```csharp
-        private async Task<IActivity> GetSearchResultAsync (KKBoxRecognizerConvert result)
-        {
-            var queryResult = await this.Api.SearchAsync (result.Entities.keyword[0]);
-            var attachments = queryResult.Content.Albums.Data
-                .Select (p =>
-                    new ThumbnailCard (p.Name,
-                        p.ReleaseDate,
-                        images : p.Images.Select (img => new CardImage (img.Url)).ToList (),
-                        tap: new CardAction("openUrl", value: GetKKBoxPlayListUrl(p.Id))).ToAttachment ());
-            var activity = MessageFactory.Carousel (attachments);
-            return activity;
-        }
-
-        private async Task<IActivity> GetChartPlayListAsync (KKBoxRecognizerConvert result)
+        private async Task<IActivity> GetSearchResultAsync(KKBoxRecognizerConvert result)
         {
             var keyword = string.Empty;
 
-            if (result.Entities.artist.Any ())
+            if (result.Entities.artist.Any())
             {
                 keyword = result.Entities.artist[0];
             }
-            else if (result.Entities.keyword.Any ())
+            else if (result.Entities.keyword.Any())
             {
                 keyword = result.Entities.keyword[0];
             }
-            var queryResult = await this.Api.SearchAsync (keyword);
-            var attachments = queryResult.Content.Albums.Data
-                .Select (p =>
-                    new ThumbnailCard (p.Name,
-                        p.ReleaseDate,
-                        images : p.Images.Select (img => new CardImage (img.Url)).ToList (),
-                        tap: new CardAction("openUrl", value : GetKKBoxPlayListUrl (p.Id))).ToAttachment ());
-            var activity = MessageFactory.Carousel (attachments);
+            var queryResult = await this.Api.SearchAsync(keyword);
+            var attachments = queryResult.Content.Albums.Data.Select (p =>
+                    new ThumbnailCard (p.Name, p.ReleaseDate,
+                                       images : p.Images.Select(img => new CardImage(img.Url)).ToList(),
+                                       tap: new CardAction("openUrl", value: GetKKBoxPlayListUrl(p.Id))).ToAttachment());
+            var activity = MessageFactory.Carousel(attachments);
             return activity;
         }
 
-        private string GetKKBoxPlayListUrl (string id) => $"kkbox://playlist/{id}";
+        private async Task<IActivity> GetChartPlayListAsync(KKBoxRecognizerConvert result)
+        {
+            var charts = await this.Api.GetChartListAsync();
+            var chart = charts.Content.Data.First(p => p.Title.Contains(result.Entities.chart_type.FirstOrDefault()) 
+                                                       && 
+                                                       p.Title.Contains(result.Entities.lang.FirstOrDefault()));
+            var playList = await this.Api.GetPlaylistOfChartAsync(chart.Id);
+            var attachment = new ThumbnailCard(playList.Content.Title, playList.Content.UpdateAt,
+                                               images: playList.Content.Images.Select(img => new CardImage(img.Url)).ToList(),
+                                               tap: new CardAction("openUrl", value: GetKKBoxPlayListUrl(playList.Content.Id))).ToAttachment();
+            var activity = MessageFactory.Attachment(attachment);
+            return activity;
+        }
+
+        private string GetKKBoxPlayListUrl(string id) => $"kkbox://playlist/{id}";
         ```
-        
-    3. 修改方法 `ContinueDialogAsync` 根據意圖執行上步驟增加的兩個方法
+
+    1. 修改方法 `ContinueDialogAsync` 根據意圖執行上步驟增加的兩個方法
+    2. 
         ```csharp
         public override async Task<DialogTurnResult> ContinueDialogAsync (DialogContext dc,
             CancellationToken cancellationToken = default (CancellationToken))

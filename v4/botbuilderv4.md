@@ -515,7 +515,7 @@
 使用LUIS (Language Understanding Intelligent Service) 了解使用者說話的意圖, 並且給予對應的結果
 ## 步驟
 1. 下載 `kkbox.luis.json` 到目錄 `CognitiveModels` 中
-2. 使用 Microsoft Account 進入 https://luis.ai
+2. 使用 Microsoft Account 進入 http://luis.ai
 3. 將 `kkbox.luis.json` 匯入成一個新的 APP, 並且發行 (Publish)
 4. 在 Manage \ Application Information 中, 複製 Application ID 以及Keys and Endpoints 中的Athoring Key
 5. 加入nuget套件 `Microsoft.Bot.Builder.AI.Luis` 
@@ -658,19 +658,6 @@
         ```csharp
         private async Task<IActivity> GetSearchResultAsync (KKBoxRecognizerConvert result)
         {
-            var queryResult = await this.Api.SearchAsync (result.Entities.keyword[0]);
-            var attachments = queryResult.Content.Albums.Data
-                .Select (p =>
-                    new ThumbnailCard (p.Name,
-                        p.ReleaseDate,
-                        images : p.Images.Select (img => new CardImage (img.Url)).ToList (),
-                        tap: new CardAction("openUrl", value: GetKKBoxPlayListUrl(p.Id))).ToAttachment ());
-            var activity = MessageFactory.Carousel (attachments);
-            return activity;
-        }
-
-        private async Task<IActivity> GetChartPlayListAsync (KKBoxRecognizerConvert result)
-        {
             var keyword = string.Empty;
 
             if (result.Entities.artist.Any ())
@@ -689,6 +676,20 @@
                         images : p.Images.Select (img => new CardImage (img.Url)).ToList (),
                         tap: new CardAction("openUrl", value : GetKKBoxPlayListUrl (p.Id))).ToAttachment ());
             var activity = MessageFactory.Carousel (attachments);
+            return activity;
+        }
+
+        private async Task<IActivity> GetChartPlayListAsync (KKBoxRecognizerConvert result)
+        {
+            var charts = await this.Api.GetChartListAsync ();
+            var chart = charts.Content.Data
+                .First (p => p.Title.Contains (result.Entities.chart_type.FirstOrDefault ()) && p.Title.Contains (result.Entities.lang.FirstOrDefault ()));
+            var playList = await this.Api.GetPlaylistOfChartAsync (chart.Id);
+            var attachment = new ThumbnailCard (playList.Content.Title,
+                playList.Content.UpdateAt,
+                images : playList.Content.Images.Select (img => new CardImage (img.Url)).ToList (),
+                tap : new CardAction ("openUrl", value : GetKKBoxPlayListUrl (playList.Content.Id))).ToAttachment ();
+            var activity = MessageFactory.Attachment (attachment);
             return activity;
         }
 
