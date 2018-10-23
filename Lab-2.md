@@ -76,8 +76,7 @@
         var activity = turnContext.Activity;
         if (activity.Type == ActivityTypes.Message)
         {
-            var count = await this._accessors.CounterAccessor
-                .GetAsync(turnContext, () => default(int), cancellationToken); 
+            var count = await this._accessors.CounterAccessor.GetAsync(turnContext, () => default(int), cancellationToken); 
             var reply = activity.CreateReply($"您說了: {activity.Text}, 這是您第 {++count} 次留言");
             await turnContext.SendActivityAsync(reply);
             await this._accessors.CounterAccessor.SetAsync(turnContext, count, cancellationToken);

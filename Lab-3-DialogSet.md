@@ -1,4 +1,4 @@
-1. 修改 `StartUp`, 註冊 `WelcomeDialog`
+1. 修改 `Startup`, 註冊 `WelcomeDialog`
    
     ```csharp
     public void ConfigureServices (IServiceCollection services)
@@ -7,27 +7,27 @@
     }
     ```
 
-2. 建立 `DialogSet`, 注入並且加入剛剛建立的 `WelcomeDialog`
+2. 在 `DemoBot.cs` 中建立 `DialogSet`, 注入並且加入剛剛建立的 `WelcomeDialog`
 
     ```csharp
     using Microsoft.Bot.Builder.Dialogs;
     
-    public DemoBot (StateAccessors accessors, WelcomeDialog welcomeDialog)
+    public DemoBot(StateAccessors accessors, WelcomeDialog welcomeDialog)
     {
         // 省略
-        Dialogs = new DialogSet (accessors.DialogStateAccessor);
-        Dialogs.Add (welcomeDialog);
+        Dialogs = new DialogSet(accessors.DialogStateAccessor);
+        Dialogs.Add(welcomeDialog);
     }
 
     private DialogSet Dialogs { get; set; }
     ```
 
-3. 修改 `OnTurnAsync`方法, 建立 `DialogContext`
+3. 在 `DemoBot.cs` 中修改 `OnTurnAsync` 方法, 建立 `DialogContext`
 
     ```csharp
     public async Task OnTurnAsync (ITurnContext turnContext, CancellationToken cancellationToken = default (CancellationToken))
     {
-        var dc = await Dialogs.CreateContextAsync (turnContext);
+        var dc = await Dialogs.CreateContextAsync(turnContext);
         // todo: 判斷activity 的狀態, 做出對應動作, 下一步驟補齊
     }
 
@@ -42,13 +42,13 @@
     }
     else if (activity.Type == ActivityTypes.ConversationUpdate)
     {
-        if (activity.MembersAdded.Any ())
+        if (activity.MembersAdded.Any())
         {
             foreach (var member in activity.MembersAdded)
             {
                 if (member.Id != activity.Recipient.Id)
                 {
-                    await dc.BeginDialogAsync (nameof (WelcomeDialog));
+                    await dc.BeginDialogAsync(nameof(WelcomeDialog));
                 }
             }
         }
@@ -66,15 +66,14 @@
     }
     else if (dialogResult.Status == DialogTurnStatus.Empty)
     {
-        var count = await this._accessors.CounterAccessor
-            .GetAsync (turnContext, () => default (int), cancellationToken);
-        var reply = activity.CreateReply ($"您說了: {activity.Text}, 這是您第 {++count} 次留言");
-        await turnContext.SendActivityAsync (reply);
-        await this._accessors.CounterAccessor.SetAsync (turnContext, count, cancellationToken);
+        var count = await this._accessors.CounterAccessor.GetAsync(turnContext, () => default(int), cancellationToken);
+        var reply = activity.CreateReply($"您說了: {activity.Text}, 這是您第 {++count} 次留言");
+        await turnContext.SendActivityAsync(reply);
+        await this._accessors.CounterAccessor.SetAsync(turnContext, count, cancellationToken);
     }
     ```
 
-6. 在 `OnTurnAsync` 的最後補上儲存 `UserState` 跟 `ConversationState` 的動作, 讓 `UserProfile`、`DialogState` 和 Counter可以被儲存
+6. 在 `OnTurnAsync` 的最後補上儲存 `UserState` 跟 `ConversationState` 的動作, 讓 `UserProfile`、`DialogState` 和 Counter 可以被儲存
 
     ```csharp
     await this._accessors.ConversationState.SaveChangesAsync(turnContext);

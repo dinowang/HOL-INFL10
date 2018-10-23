@@ -39,10 +39,6 @@
    dotnet add package Microsoft.Bot.Builder
    dotnet add package Microsoft.Bot.Builder.Integration.AspNet.Core
    dotnet add package Microsoft.Bot.Configuration
-   ```
-
-5. 執行套件安裝指令
-   ```sh
    dotnet restore
    ```
 

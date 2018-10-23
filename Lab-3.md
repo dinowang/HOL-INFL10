@@ -12,6 +12,7 @@
 1. 新增 package `Microsoft.Bot.Builder.Dialogs`
     ```sh
     dotnet add package Microsoft.Bot.Builder.Dialogs
+    dotnet restore
     ```
 
 2. 建立類別 `UserProfile`, 有基本資料的屬性
@@ -42,7 +43,7 @@
             public UserState UserState { get; set; }
     ```
 
-4. 在 `StartUp` 註冊 `UserState`, 因此範例中, 需要儲存使用者資訊到 `UserState` 中
+4. 在 `Startup` 註冊 `UserState`, 因此範例中, 需要儲存使用者資訊到 `UserState` 中
     ```csharp
          public void ConfigureServices (IServiceCollection services) 
          {
@@ -54,5 +55,5 @@
 5. 建立類別 `WelcomeDialog`, 並且實作  
    [WelcomeDialog.cs](Lab-3-WelcomeDialog.md)
 
-6. 修改 `DemoBot` 在加入對話時, 先進入 `WelcomeDialog`, 首先設定 Dialog 進入 DialogSet, 並在 `conversationUpdate` 事件時, 開始 Dialog, 並且在 `message` 事件中若對話未結束就繼續對話
+6. 修改 `DemoBot` 在加入對話時, 先進入 `WelcomeDialog`, 首先設定 Dialog 進入 DialogSet, 並在 `conversationUpdate` 事件時, 開始 Dialog, 並且在 `message` 事件中若對話未結束就繼續對話  
    [DialogSet.cs](Lab-3-DialogSet.md)
