@@ -4,15 +4,18 @@ using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 
-public class DemoBot : IBot
+namespace DemoBotApp
 {
-    public async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
+    public class DemoBot : IBot
     {
-        var activity = turnContext.Activity;
-        if (activity.Type == ActivityTypes.Message)
+        public async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var reply = activity.CreateReply($"您說了: {activity.Text}");
-            await turnContext.SendActivityAsync(reply);
+            var activity = turnContext.Activity;
+            if (activity.Type == ActivityTypes.Message)
+            {
+                var reply = activity.CreateReply($"您說了: {activity.Text}");
+                await turnContext.SendActivityAsync(reply);
+            }
         }
     }
 }

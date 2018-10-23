@@ -18,17 +18,20 @@
     ```csharp
     using Microsoft.Bot.Builder;
     
-    public class StateAccessors
+    namespace DemoBotApp
     {
-        public StateAccessors(ConversationState convState)
+        public class StateAccessors
         {
-            this.ConversationState = convState;
-            this.CounterAccessor = convState.CreateProperty<int>(nameof(CounterAccessor));
+            public StateAccessors(ConversationState convState)
+            {
+                this.ConversationState = convState;
+                this.CounterAccessor = convState.CreateProperty<int>(nameof(CounterAccessor));
+            }
+    
+            public IStatePropertyAccessor<int> CounterAccessor { get; set; }
+    
+            public ConversationState ConversationState { get; }
         }
- 
-        public IStatePropertyAccessor<int> CounterAccessor { get; set; }
- 
-        public ConversationState ConversationState { get; }
     }
     ```
 

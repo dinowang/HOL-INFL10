@@ -17,11 +17,14 @@
 
 2. 建立類別 `UserProfile`, 有基本資料的屬性
     ```csharp
-    public class UserProfile
+    namespace DemoBotApp
     {
-        public string UserName { get; set; }
-        public bool Gender { get;set; }
-        public int Age { get; set; }
+        public class UserProfile
+        {
+            public string UserName { get; set; }
+            public bool Gender { get;set; }
+            public int Age { get; set; }
+        }
     }
     ```
 

@@ -13,13 +13,14 @@
    
 2. 使用 Microsoft Account 進入 https://luis.ai
 
-3. 將 `kkbox.luis.json` 匯入成一個新的 APP, 並且發行 (Publish)
+3. 將 `kkbox.luis.json` 匯入成一個新的 APP, 訓練 (Train) 並且發行 (Publish)
 
-4. 在 Manage \ Application Information 中, 複製 Application ID 以及Keys and Endpoints 中的Athoring Key
+4. 在 Manage \ Application Information 中, 複製 Application ID 以及Keys and Endpoints 中的 Authoring Key
 
 5. 加入nuget套件 `Microsoft.Bot.Builder.AI.Luis` 
     ```sh
     dotnet add package Microsoft.Bot.Builder.AI.Luis
+    dotnet restore
     ```
 
 6. 在 bot 中加入 luis
@@ -28,7 +29,7 @@
     ```
 
 7. 實作 `KKBoxDialog`  
-   [KKBoxDialog](code/KKBoxdialog.cs)
+   [KKBoxDialog.cs](code/KKBoxDialog.cs)
    
    > 都回傳狀態為 `DialogTurnStatus.Waiting` 的原因是, 讓 Bot 維持在 `KKBoxDialog` 中
 
@@ -36,14 +37,14 @@
     ```csharp
     using Microsoft.Bot.Builder.AI.Luis;
 
-    public void ConfigureServices (IServiceCollection services)
+    public void ConfigureServices(IServiceCollection services)
     {
         // 省略
         var luisService = botConfig.Services.OfType<LuisService>().FirstOrDefault();
 
         if (luisService == null)
         {
-            throw new InvalidOperationException ($"The .bot file does not contain an luis service with name '{environment}'.");
+            throw new InvalidOperationException($"The .bot file does not contain an luis service with name '{environment}'.");
         }
         var luisApp = new LuisApplication(luisService.AppId, luisService.AuthoringKey, luisService.GetEndpoint());
         var recognizer = new LuisRecognizer(luisApp);
@@ -101,9 +102,10 @@
 13. 加入 `KKBOX.OpenAPI.Standard` 套件
     ```sh
     dotnet add package KKBOX.OpenAPI.Standard
+    dotnet restore
     ```
 
-14. 在 `StartUp` 中註冊 `KKBOXAPI`
+14. 在 `Startup` 中註冊 `KKBOXAPI`
     ```csharp
     services.AddSingleton<KKBOX.OpenAPI.KKBOXAPI>(sp =>
     {
@@ -118,8 +120,20 @@
     });
     ```
 
-15. 修改 `KKBoxDialog` , 判斷使用者意圖, 根據使用者意圖決定動作
-    
+15. 修改 `KKBoxDialog`, 判斷使用者意圖, 根據使用者意圖決定動作
+
+    1. 建構子增加 `KKBOXAPI` 參數, 並且放到屬性中
+        ```csharp
+        public KKBoxDialog (LuisRecognizer luisRecognizer, KKBOXAPI api) : base (nameof(KKBoxDialog))
+        {
+            LuisRecognizer = luisRecognizer;
+            Api = api;
+        }
+
+        public KKBOXAPI Api { get; }
+        ```
+
+    2. 增加 `GetSearchResultAsync` 跟 `GetChartPlayListAsync` 兩個方法, 可以用來搜尋跟取得熱門榜資訊
         ```csharp
         private async Task<IActivity> GetSearchResultAsync(KKBoxRecognizerConvert result)
         {
@@ -134,7 +148,7 @@
                 keyword = result.Entities.keyword[0];
             }
             var queryResult = await this.Api.SearchAsync(keyword);
-            var attachments = queryResult.Content.Albums.Data.Select (p =>
+            var attachments = queryResult.Content.Albums.Data.Select(p =>
                     new ThumbnailCard (p.Name, p.ReleaseDate,
                                        images : p.Images.Select(img => new CardImage(img.Url)).ToList(),
                                        tap: new CardAction("openUrl", value: GetKKBoxPlayListUrl(p.Id))).ToAttachment());
@@ -159,23 +173,22 @@
         private string GetKKBoxPlayListUrl(string id) => $"kkbox://playlist/{id}";
         ```
 
-    1. 修改方法 `ContinueDialogAsync` 根據意圖執行上步驟增加的兩個方法
-    2. 
+    3. 修改方法 `ContinueDialogAsync` 根據意圖執行上步驟增加的兩個方法
         ```csharp
         public override async Task<DialogTurnResult> ContinueDialogAsync (DialogContext dc,
-            CancellationToken cancellationToken = default (CancellationToken))
+            CancellationToken cancellationToken = default(CancellationToken))
         {
-            var result = await this.LuisRecognizer.RecognizeAsync<KKBoxRecognizerConvert> (dc.Context, cancellationToken);
+            var result = await this.LuisRecognizer.RecognizeAsync<KKBoxRecognizerConvert>(dc.Context, cancellationToken);
             var indent = result.TopIntent ().intent;
             IActivity activity = null;
 
             switch (indent)
             {
                 case KKBoxRecognizerConvert.Intent.chart:
-                    activity = await this.GetChartPlayListAsync (result);
+                    activity = await this.GetChartPlayListAsync(result);
                     break;
                 case KKBoxRecognizerConvert.Intent.search:
-                    activity = await this.GetSearchResultAsync (result);
+                    activity = await this.GetSearchResultAsync(result);
                     break;
                 default:
                     break;
@@ -186,6 +199,6 @@
                 await dc.Context.SendActivityAsync(activity);
             }
 
-            return new DialogTurnResult (DialogTurnStatus.Waiting);
+            return new DialogTurnResult(DialogTurnStatus.Waiting);
         }
         ```

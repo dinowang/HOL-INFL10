@@ -9,9 +9,12 @@
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Builder;
 
-    public class WelcomeDialog : ComponentDialog
+    namespace DemoBotApp
     {
-        public WelcomeDialog() : base(nameof(WelcomeDialog)) {}
+        public class WelcomeDialog : ComponentDialog
+        {
+            public WelcomeDialog() : base(nameof(WelcomeDialog)) {}
+        }
     }
     ```
 
