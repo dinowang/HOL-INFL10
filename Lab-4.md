@@ -88,7 +88,7 @@
 
 12. 因為 `LuisRecognizer.RecognizeAsync` 的結果中, Entity 屬性是 `JObject` 型別, 還是希望用強型別處理
     
-    1. 透過 `luisgen` 將意義產生成 .cs 
+    1. 透過 `luisgen` 將意圖生成 .cs 
         ```sh
         luisgen "CognitiveModels\kkbox.luis.json" -cs DemoBotApp.KKBoxRecognizerConvert
         ```
