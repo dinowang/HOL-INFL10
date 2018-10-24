@@ -15,7 +15,7 @@
 
 3. 將 `kkbox.luis.json` 匯入成一個新的 APP, 訓練 (Train) 並且發行 (Publish)
 
-4. 在 Manage \ Application Information 中, 複製 Application ID 以及Keys and Endpoints 中的 Authoring Key
+4. 在 Manage \ Application Information 中, 複製 Application ID 以及 Keys and Endpoints 中的 Authoring Key
 
 5. 加入nuget套件 `Microsoft.Bot.Builder.AI.Luis` 
     ```sh
@@ -56,7 +56,7 @@
 
 9.  修改 `DemoBot.cs`, 注入 `KKBoxDialog` 並且將 `KKBoxDialog` 加入 `DialogSet`
     ```csharp
-    public DemoBot (StateAccessors accessors, WelcomeDialog welcomeDialog, KKBoxDialog kkBoxDialog)
+    public DemoBot(StateAccessors accessors, WelcomeDialog welcomeDialog, KKBoxDialog kkBoxDialog)
     {
         this._accessors = accessors;
         Dialogs = new DialogSet(accessors.DialogStateAccessor);
@@ -84,7 +84,7 @@
     
     1. 透過 `luisgen` 將意義產生成 .cs 
         ```sh
-        luisgen "CognitiveModels\kkbox.luis.json" -cs <namespace>.KKBoxRecognizerConvert
+        luisgen "CognitiveModels\kkbox.luis.json" -cs DemoBotApp.KKBoxRecognizerConvert
         ```
 
     2. 修改 `KKBoxDialog` 的 `ContinueDialogAsyn` 方法

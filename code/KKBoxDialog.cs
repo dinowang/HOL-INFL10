@@ -8,16 +8,16 @@ namespace DemoBotApp
 {
     public class KKBoxDialog : Dialog
     {
-        public KKBoxDialog (LuisRecognizer luisRecognizer) : base (nameof (KKBoxDialog))
+        public KKBoxDialog (LuisRecognizer luisRecognizer) : base(nameof(KKBoxDialog))
         {
             LuisRecognizer = luisRecognizer;
         }
 
         public LuisRecognizer LuisRecognizer { get; }
 
-        public override async Task<DialogTurnResult> BeginDialogAsync (DialogContext dc, 
+        public override async Task<DialogTurnResult> BeginDialogAsync(DialogContext dc, 
             object options = null, 
-            CancellationToken cancellationToken = default (CancellationToken))
+            CancellationToken cancellationToken = default(CancellationToken))
         {
             return await dc.ContinueDialogAsync(cancellationToken);
         }
@@ -25,10 +25,11 @@ namespace DemoBotApp
         public override async Task<DialogTurnResult> ContinueDialogAsync(DialogContext dc, 
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            var result = await this.LuisRecognizer.RecognizeAsync (dc.Context, cancellationToken);
+            var result = await this.LuisRecognizer.RecognizeAsync(dc.Context, cancellationToken);
             var indent = result.GetTopScoringIntent().intent;
             await dc.Context.SendActivityAsync(MessageFactory.Text($"您的意圖是: {indent}, {result.Entities}"));
-            return new DialogTurnResult (DialogTurnStatus.Waiting);
+            
+            return new DialogTurnResult(DialogTurnStatus.Waiting);
         }
     }
 }
