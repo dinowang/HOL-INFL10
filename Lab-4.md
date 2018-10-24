@@ -87,6 +87,10 @@
         luisgen "CognitiveModels\kkbox.luis.json" -cs DemoBotApp.KKBoxRecognizerConvert
         ```
 
+        > 如果因環境關係無法順利運用 luisgen 產生 KKBoxRecognizerConvert，請由 [KKBoxRecognizerConvert.cs](code/KKBoxRecognizerConvert.cs) 取得   
+        > 可參考 <https://github.com/Microsoft/botbuilder-tools/issues/643>
+
+
     2. 修改 `KKBoxDialog` 的 `ContinueDialogAsyn` 方法
         ```csharp
         public override async Task<DialogTurnResult> ContinueDialogAsync(DialogContext dc, 
