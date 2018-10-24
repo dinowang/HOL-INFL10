@@ -179,7 +179,7 @@
 
         if (age < 18 || age > 100)
         {
-            await promptContext.Context.SendActivityAsync (MessageFactory.Text ("年齡需在 18 與 99 之間"));
+            await promptContext.Context.SendActivityAsync(MessageFactory.Text("我不是歧視你，但是年齡需在 18 與 99 之間"));
             return false;
         }
         return true;
