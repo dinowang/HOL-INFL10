@@ -7,14 +7,17 @@
 
 ## 實作目標
 使用 LUIS (Language Understanding Intelligent Service) 了解使用者說話的意圖, 並且給予對應的結果  
-範例運用 KKBox 所提供的 Open API 進行音樂內容搜尋
+範例運用 KKBox 所提供的 Open API 進行音樂內容搜尋, 在 hands-on lab 之後相關的 API key 將會被回收, 必須自行申請
 
 > KKBox Open API 服務 <https://developer.kkbox.com/>
 
 ## 步驟
 1. 下載 `kkbox.luis.json` 到目錄 `CognitiveModels` 中
+
+   > kkbox.luis.json 是事先在 LUIS 平台上訓練的語言模型, 在此匯入已經完成的部分避免冗長的訓練流程  
+   > 你可以追加增加訓練, 增加自己定義的意圖與語意  
    
-2. 使用 Microsoft Account 進入 https://luis.ai
+2. 使用 Microsoft Account 進入 https://luis.ai (或 https://www.luis.ai/home)
 
 3. 將 `kkbox.luis.json` 匯入成一個新的 APP, 訓練 (Train) 並且發行 (Publish)
 
