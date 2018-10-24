@@ -160,7 +160,7 @@
         userProfile.Age = age;
         await this.UserProfileAccessor.SetAsync(stepContext.Context, userProfile);
 
-        await stepContext.Context.SendActivityAsync(MessageFactory.Text ($"您是{userProfile.UserName}, {(userProfile.Gender ? "男" : "女")},   {userProfile.Age} 歲"));
+        await stepContext.Context.SendActivityAsync(MessageFactory.Text($"好的，咱們的 {userProfile.UserName} 是個{(userProfile.Gender ? "男" : "女")}神,  {userProfile.Age} 歲"));
 
         return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
     }
