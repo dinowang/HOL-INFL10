@@ -6,7 +6,10 @@
 學習如何整合 LUIS 服務進 bot
 
 ## 實作目標
-使用 LUIS (Language Understanding Intelligent Service) 了解使用者說話的意圖, 並且給予對應的結果
+使用 LUIS (Language Understanding Intelligent Service) 了解使用者說話的意圖, 並且給予對應的結果  
+範例運用 KKBox 所提供的 Open API 進行音樂內容搜尋
+
+> KKBox Open API 服務 <https://developer.kkbox.com/>
 
 ## 步驟
 1. 下載 `kkbox.luis.json` 到目錄 `CognitiveModels` 中
@@ -91,7 +94,7 @@
         > 可參考 <https://github.com/Microsoft/botbuilder-tools/issues/643>
 
 
-    2. 修改 `KKBoxDialog` 的 `ContinueDialogAsyn` 方法
+    2. 修改 `KKBoxDialog` 的 `ContinueDialogAsync` 方法
         ```csharp
         public override async Task<DialogTurnResult> ContinueDialogAsync(DialogContext dc, 
             CancellationToken cancellationToken = default(CancellationToken))
@@ -99,7 +102,8 @@
             var result = await this.LuisRecognizer.RecognizeAsync<KKBoxRecognizerConvert>(dc.Context, cancellationToken);
             var indent = result.TopIntent().intent;
             await dc.Context.SendActivityAsync(MessageFactory.Text($"您的意圖是: {indent}, {result.Entities}"));
-            return new DialogTurnResult (DialogTurnStatus.Waiting);
+
+            return new DialogTurnResult(DialogTurnStatus.Waiting);
         }
         ```
 
@@ -128,7 +132,7 @@
 
     1. 建構子增加 `KKBOXAPI` 參數, 並且放到屬性中
         ```csharp
-        public KKBoxDialog (LuisRecognizer luisRecognizer, KKBOXAPI api) : base (nameof(KKBoxDialog))
+        public KKBoxDialog (LuisRecognizer luisRecognizer, KKBOXAPI api) : base(nameof(KKBoxDialog))
         {
             LuisRecognizer = luisRecognizer;
             Api = api;
@@ -153,9 +157,9 @@
             }
             var queryResult = await this.Api.SearchAsync(keyword);
             var attachments = queryResult.Content.Albums.Data.Select(p =>
-                    new ThumbnailCard (p.Name, p.ReleaseDate,
-                                       images : p.Images.Select(img => new CardImage(img.Url)).ToList(),
-                                       tap: new CardAction("openUrl", value: GetKKBoxPlayListUrl(p.Id))).ToAttachment());
+                    new ThumbnailCard(p.Name, p.ReleaseDate,
+                                      images : p.Images.Select(img => new CardImage(img.Url)).ToList(),
+                                      tap: new CardAction("openUrl", value: GetKKBoxPlayListUrl(p.Id))).ToAttachment());
             var activity = MessageFactory.Carousel(attachments);
             return activity;
         }
@@ -183,7 +187,7 @@
             CancellationToken cancellationToken = default(CancellationToken))
         {
             var result = await this.LuisRecognizer.RecognizeAsync<KKBoxRecognizerConvert>(dc.Context, cancellationToken);
-            var indent = result.TopIntent ().intent;
+            var indent = result.TopIntent().intent;
             IActivity activity = null;
 
             switch (indent)
