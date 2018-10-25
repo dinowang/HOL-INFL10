@@ -12,7 +12,7 @@
 > KKBox Open API 服務 <https://developer.kkbox.com/>
 
 ## 步驟
-1. 下載 `kkbox.luis.json` 到目錄 `CognitiveModels` 中
+1. 下載 [kkbox.luis.json](code/kkbox.luis.json) 到目錄 `CognitiveModels` 中
 
    > kkbox.luis.json 是事先在 LUIS 平台上訓練的語言模型, 在此匯入已經完成的部分避免冗長的訓練流程  
    > 你可以追加增加訓練, 增加自己定義的意圖與語意  
