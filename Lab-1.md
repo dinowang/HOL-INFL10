@@ -54,7 +54,7 @@
    ```
 
 8. 在 Startup.cs 中, 註冊 service, 使用 middleware  
-   [Statrup.cs](code/Statrup.cs)
+   [Startup.cs](code/Startup.cs)
 
 9.  執行 ASP.NET Core 應用程式
    ```sh

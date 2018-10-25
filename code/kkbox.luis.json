@@ -1,580 +1,587 @@
 {
-    "luis_schema_version": "3.1.0",
-    "versionId": "0.1",
-    "name": "KKBOX",
-    "desc": "使用KKBOX當作範例",
-    "culture": "zh-cn",
-    "intents": [
-      {
-        "name": "chart"
-      },
-      {
-        "name": "None"
-      },
-      {
-        "name": "search"
-      }
-    ],
-    "entities": [
-      {
-        "name": "artist",
-        "roles": []
-      },
-      {
-        "name": "chart_type",
-        "roles": []
-      },
-      {
-        "name": "keyword",
-        "roles": []
-      },
-      {
-        "name": "lang",
-        "roles": []
-      }
-    ],
-    "composites": [],
-    "closedLists": [],
-    "patternAnyEntities": [],
-    "regex_entities": [],
-    "prebuiltEntities": [],
-    "model_features": [],
-    "regex_features": [],
-    "patterns": [],
-    "utterances": [
-      {
-        "text": "想聽西洋熱門新歌",
-        "intent": "chart",
-        "entities": [
-          {
-            "entity": "lang",
-            "startPos": 2,
-            "endPos": 3
-          },
-          {
-            "entity": "chart_type",
-            "startPos": 4,
-            "endPos": 7
-          }
-        ]
-      },
-      {
-        "text": "我想聽台語每日熱門",
-        "intent": "chart",
-        "entities": [
-          {
-            "entity": "lang",
-            "startPos": 3,
-            "endPos": 4
-          },
-          {
-            "entity": "chart_type",
-            "startPos": 5,
-            "endPos": 8
-          }
-        ]
-      },
-      {
-        "text": "我想聽時間停了",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "keyword",
-            "startPos": 3,
-            "endPos": 6
-          }
-        ]
-      },
-      {
-        "text": "我想聽韓語熱門新歌",
-        "intent": "chart",
-        "entities": [
-          {
-            "entity": "lang",
-            "startPos": 3,
-            "endPos": 4
-          },
-          {
-            "entity": "chart_type",
-            "startPos": 5,
-            "endPos": 8
-          }
-        ]
-      },
-      {
-        "text": "我想要找A-Lin的專輯",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "artist",
-            "startPos": 4,
-            "endPos": 8
-          }
-        ]
-      },
-      {
-        "text": "我想要找Before I Cry",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "keyword",
-            "startPos": 4,
-            "endPos": 15
-          }
-        ]
-      },
-      {
-        "text": "我想要找Hello",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "keyword",
-            "startPos": 4,
-            "endPos": 8
-          }
-        ]
-      },
-      {
-        "text": "我想要找Shallow",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "keyword",
-            "startPos": 4,
-            "endPos": 10
-          }
-        ]
-      },
-      {
-        "text": "我想要找凱文哈里斯的專輯",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "artist",
-            "startPos": 4,
-            "endPos": 8
-          }
-        ]
-      },
-      {
-        "text": "我想要找告白氣球",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "keyword",
-            "startPos": 4,
-            "endPos": 7
-          }
-        ]
-      },
-      {
-        "text": "我想要找周杰倫的專輯",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "artist",
-            "startPos": 4,
-            "endPos": 6
-          }
-        ]
-      },
-      {
-        "text": "我想要找周杰倫的音樂",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "artist",
-            "startPos": 4,
-            "endPos": 6
-          }
-        ]
-      },
-      {
-        "text": "我想要找情非得已",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "keyword",
-            "startPos": 4,
-            "endPos": 7
-          }
-        ]
-      },
-      {
-        "text": "我想要找有一種悲傷",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "keyword",
-            "startPos": 4,
-            "endPos": 8
-          }
-        ]
-      },
-      {
-        "text": "我想要找李榮浩的專輯",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "artist",
-            "startPos": 4,
-            "endPos": 6
-          }
-        ]
-      },
-      {
-        "text": "我想要找林俊傑的音樂",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "artist",
-            "startPos": 4,
-            "endPos": 6
-          }
-        ]
-      },
-      {
-        "text": "我想要找青花瓷",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "keyword",
-            "startPos": 4,
-            "endPos": 6
-          }
-        ]
-      },
-      {
-        "text": "我想要聽 Head Above Water",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "keyword",
-            "startPos": 5,
-            "endPos": 20
-          }
-        ]
-      },
-      {
-        "text": "我想要聽 The Feeling",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "keyword",
-            "startPos": 5,
-            "endPos": 15
-          }
-        ]
-      },
-      {
-        "text": "我想要聽BBIBBI",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "keyword",
-            "startPos": 4,
-            "endPos": 9
-          }
-        ]
-      },
-      {
-        "text": "我想要聽I'll Never Love Again",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "keyword",
-            "startPos": 4,
-            "endPos": 24
-          }
-        ]
-      },
-      {
-        "text": "我想要聽Jay Chou的專輯",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "artist",
-            "startPos": 4,
-            "endPos": 11
-          }
-        ]
-      },
-      {
-        "text": "我想要聽Memoria",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "keyword",
-            "startPos": 4,
-            "endPos": 10
-          }
-        ]
-      },
-      {
-        "text": "我想要聽Super Junior的音樂",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "artist",
-            "startPos": 4,
-            "endPos": 15
-          }
-        ]
-      },
-      {
-        "text": "我想要聽南拳媽媽的音樂",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "artist",
-            "startPos": 4,
-            "endPos": 7
-          }
-        ]
-      },
-      {
-        "text": "我想要聽吳青峰的歌",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "artist",
-            "startPos": 4,
-            "endPos": 6
-          }
-        ]
-      },
-      {
-        "text": "我想要聽教我這麼愛下去",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "keyword",
-            "startPos": 4,
-            "endPos": 10
-          }
-        ]
-      },
-      {
-        "text": "我想要聽文慧如的歌",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "artist",
-            "startPos": 4,
-            "endPos": 6
-          }
-        ]
-      },
-      {
-        "text": "我想要聽日語每日熱門",
-        "intent": "chart",
-        "entities": [
-          {
-            "entity": "lang",
-            "startPos": 4,
-            "endPos": 5
-          },
-          {
-            "entity": "chart_type",
-            "startPos": 6,
-            "endPos": 9
-          }
-        ]
-      },
-      {
-        "text": "我想要聽日語熱門新歌",
-        "intent": "chart",
-        "entities": [
-          {
-            "entity": "lang",
-            "startPos": 4,
-            "endPos": 5
-          },
-          {
-            "entity": "chart_type",
-            "startPos": 6,
-            "endPos": 9
-          }
-        ]
-      },
-      {
-        "text": "我想要聽沒有絕對",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "keyword",
-            "startPos": 4,
-            "endPos": 7
-          }
-        ]
-      },
-      {
-        "text": "我想要聽王牌冤家",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "keyword",
-            "startPos": 4,
-            "endPos": 7
-          }
-        ]
-      },
-      {
-        "text": "我想要聽粵語每日熱門",
-        "intent": "chart",
-        "entities": [
-          {
-            "entity": "lang",
-            "startPos": 4,
-            "endPos": 5
-          },
-          {
-            "entity": "chart_type",
-            "startPos": 6,
-            "endPos": 9
-          }
-        ]
-      },
-      {
-        "text": "我想要聽聽媽媽的話",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "keyword",
-            "startPos": 4,
-            "endPos": 8
-          }
-        ]
-      },
-      {
-        "text": "我想要聽華語熱門新歌",
-        "intent": "chart",
-        "entities": [
-          {
-            "entity": "lang",
-            "startPos": 4,
-            "endPos": 5
-          },
-          {
-            "entity": "chart_type",
-            "startPos": 6,
-            "endPos": 9
-          }
-        ]
-      },
-      {
-        "text": "我想要聽西洋每日熱門",
-        "intent": "chart",
-        "entities": [
-          {
-            "entity": "lang",
-            "startPos": 4,
-            "endPos": 5
-          },
-          {
-            "entity": "chart_type",
-            "startPos": 6,
-            "endPos": 9
-          }
-        ]
-      },
-      {
-        "text": "我想要聽西洋熱門新歌",
-        "intent": "chart",
-        "entities": [
-          {
-            "entity": "lang",
-            "startPos": 4,
-            "endPos": 5
-          },
-          {
-            "entity": "chart_type",
-            "startPos": 6,
-            "endPos": 9
-          }
-        ]
-      },
-      {
-        "text": "我想要聽許志安的歌",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "artist",
-            "startPos": 4,
-            "endPos": 6
-          }
-        ]
-      },
-      {
-        "text": "我想要聽過去",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "keyword",
-            "startPos": 4,
-            "endPos": 5
-          }
-        ]
-      },
-      {
-        "text": "我想要聽馬龍戲裡",
-        "intent": "search",
-        "entities": [
-          {
-            "entity": "keyword",
-            "startPos": 4,
-            "endPos": 7
-          }
-        ]
-      },
-      {
-        "text": "我要聽西洋熱門新歌",
-        "intent": "chart",
-        "entities": [
-          {
-            "entity": "lang",
-            "startPos": 3,
-            "endPos": 4
-          },
-          {
-            "entity": "chart_type",
-            "startPos": 5,
-            "endPos": 8
-          }
-        ]
-      },
-      {
-        "text": "粵語熱門新歌",
-        "intent": "chart",
-        "entities": [
-          {
-            "entity": "lang",
-            "startPos": 0,
-            "endPos": 1
-          },
-          {
-            "entity": "chart_type",
-            "startPos": 2,
-            "endPos": 5
-          }
-        ]
-      },
-      {
-        "text": "錢櫃台語點播榜",
-        "intent": "chart",
-        "entities": [
-          {
-            "entity": "lang",
-            "startPos": 2,
-            "endPos": 3
-          },
-          {
-            "entity": "chart_type",
-            "startPos": 4,
-            "endPos": 6
-          }
-        ]
-      }
-    ],
-    "settings": []
-  }
+  "luis_schema_version": "3.1.0",
+  "versionId": "0.1",
+  "name": "KKBOX",
+  "desc": "使用KKBOX當作範例",
+  "culture": "zh-cn",
+  "intents": [
+    {
+      "name": "chart"
+    },
+    {
+      "name": "None"
+    },
+    {
+      "name": "search"
+    }
+  ],
+  "entities": [
+    {
+      "name": "chart_type",
+      "roles": []
+    },
+    {
+      "name": "keyword",
+      "roles": []
+    },
+    {
+      "name": "lang",
+      "roles": []
+    }
+  ],
+  "composites": [],
+  "closedLists": [],
+  "patternAnyEntities": [],
+  "regex_entities": [],
+  "prebuiltEntities": [],
+  "model_features": [],
+  "regex_features": [],
+  "patterns": [],
+  "utterances": [
+    {
+      "text": "想聽西洋熱門新歌",
+      "intent": "chart",
+      "entities": [
+        {
+          "entity": "lang",
+          "startPos": 2,
+          "endPos": 3
+        },
+        {
+          "entity": "chart_type",
+          "startPos": 4,
+          "endPos": 7
+        }
+      ]
+    },
+    {
+      "text": "我想聽台語每日熱門",
+      "intent": "chart",
+      "entities": [
+        {
+          "entity": "lang",
+          "startPos": 3,
+          "endPos": 4
+        },
+        {
+          "entity": "chart_type",
+          "startPos": 5,
+          "endPos": 8
+        }
+      ]
+    },
+    {
+      "text": "我想聽時間停了",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 3,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "我想聽韓語熱門新歌",
+      "intent": "chart",
+      "entities": [
+        {
+          "entity": "lang",
+          "startPos": 3,
+          "endPos": 4
+        },
+        {
+          "entity": "chart_type",
+          "startPos": 5,
+          "endPos": 8
+        }
+      ]
+    },
+    {
+      "text": "我想要找A-Lin的專輯",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 8
+        }
+      ]
+    },
+    {
+      "text": "我想要找Before I Cry",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 15
+        }
+      ]
+    },
+    {
+      "text": "我想要找Hello",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 8
+        }
+      ]
+    },
+    {
+      "text": "我想要找Shallow",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 10
+        }
+      ]
+    },
+    {
+      "text": "我想要找凱文哈里斯的專輯",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 8
+        }
+      ]
+    },
+    {
+      "text": "我想要找告白氣球",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 7
+        }
+      ]
+    },
+    {
+      "text": "我想要找周杰倫的專輯",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "我想要找周杰倫的音樂",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "我想要找情非得已",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 7
+        }
+      ]
+    },
+    {
+      "text": "我想要找有一種悲傷",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 8
+        }
+      ]
+    },
+    {
+      "text": "我想要找李榮浩的專輯",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "我想要找林俊傑的音樂",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "我想要找青花瓷",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "我想要聽 Head Above Water",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 5,
+          "endPos": 20
+        }
+      ]
+    },
+    {
+      "text": "我想要聽 The Feeling",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 5,
+          "endPos": 15
+        }
+      ]
+    },
+    {
+      "text": "我想要聽BBIBBI",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 9
+        }
+      ]
+    },
+    {
+      "text": "我想要聽I'll Never Love Again",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 24
+        }
+      ]
+    },
+    {
+      "text": "我想要聽Jay Chou的專輯",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 11
+        }
+      ]
+    },
+    {
+      "text": "我想要聽Memoria",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 10
+        }
+      ]
+    },
+    {
+      "text": "我想要聽Super Junior的音樂",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 15
+        }
+      ]
+    },
+    {
+      "text": "我想要聽南拳媽媽的音樂",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 7
+        }
+      ]
+    },
+    {
+      "text": "我想要聽吳青峰的歌",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "我想要聽周杰倫",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "我想要聽教我這麼愛下去",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 10
+        }
+      ]
+    },
+    {
+      "text": "我想要聽文慧如的歌",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "我想要聽日語每日熱門",
+      "intent": "chart",
+      "entities": [
+        {
+          "entity": "lang",
+          "startPos": 4,
+          "endPos": 5
+        },
+        {
+          "entity": "chart_type",
+          "startPos": 6,
+          "endPos": 9
+        }
+      ]
+    },
+    {
+      "text": "我想要聽日語熱門新歌",
+      "intent": "chart",
+      "entities": [
+        {
+          "entity": "lang",
+          "startPos": 4,
+          "endPos": 5
+        },
+        {
+          "entity": "chart_type",
+          "startPos": 6,
+          "endPos": 9
+        }
+      ]
+    },
+    {
+      "text": "我想要聽沒有絕對",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 7
+        }
+      ]
+    },
+    {
+      "text": "我想要聽王牌冤家",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 7
+        }
+      ]
+    },
+    {
+      "text": "我想要聽粵語每日熱門",
+      "intent": "chart",
+      "entities": [
+        {
+          "entity": "lang",
+          "startPos": 4,
+          "endPos": 5
+        },
+        {
+          "entity": "chart_type",
+          "startPos": 6,
+          "endPos": 9
+        }
+      ]
+    },
+    {
+      "text": "我想要聽聽媽媽的話",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 8
+        }
+      ]
+    },
+    {
+      "text": "我想要聽華語熱門新歌",
+      "intent": "chart",
+      "entities": [
+        {
+          "entity": "lang",
+          "startPos": 4,
+          "endPos": 5
+        },
+        {
+          "entity": "chart_type",
+          "startPos": 6,
+          "endPos": 9
+        }
+      ]
+    },
+    {
+      "text": "我想要聽西洋每日熱門",
+      "intent": "chart",
+      "entities": [
+        {
+          "entity": "lang",
+          "startPos": 4,
+          "endPos": 5
+        },
+        {
+          "entity": "chart_type",
+          "startPos": 6,
+          "endPos": 9
+        }
+      ]
+    },
+    {
+      "text": "我想要聽西洋熱門新歌",
+      "intent": "chart",
+      "entities": [
+        {
+          "entity": "lang",
+          "startPos": 4,
+          "endPos": 5
+        },
+        {
+          "entity": "chart_type",
+          "startPos": 6,
+          "endPos": 9
+        }
+      ]
+    },
+    {
+      "text": "我想要聽許志安的歌",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "我想要聽過去",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "我想要聽馬龍戲裡",
+      "intent": "search",
+      "entities": [
+        {
+          "entity": "keyword",
+          "startPos": 4,
+          "endPos": 7
+        }
+      ]
+    },
+    {
+      "text": "我要聽西洋熱門新歌",
+      "intent": "chart",
+      "entities": [
+        {
+          "entity": "lang",
+          "startPos": 3,
+          "endPos": 4
+        },
+        {
+          "entity": "chart_type",
+          "startPos": 5,
+          "endPos": 8
+        }
+      ]
+    },
+    {
+      "text": "粵語熱門新歌",
+      "intent": "chart",
+      "entities": [
+        {
+          "entity": "lang",
+          "startPos": 0,
+          "endPos": 1
+        },
+        {
+          "entity": "chart_type",
+          "startPos": 2,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "錢櫃台語點播榜",
+      "intent": "chart",
+      "entities": [
+        {
+          "entity": "lang",
+          "startPos": 2,
+          "endPos": 3
+        },
+        {
+          "entity": "chart_type",
+          "startPos": 4,
+          "endPos": 6
+        }
+      ]
+    }
+  ],
+  "settings": []
+}

@@ -150,11 +150,7 @@
         {
             var keyword = string.Empty;
 
-            if (result.Entities.artist.Any())
-            {
-                keyword = result.Entities.artist[0];
-            }
-            else if (result.Entities.keyword.Any())
+            if (result.Entities.keyword.Any())
             {
                 keyword = result.Entities.keyword[0];
             }
