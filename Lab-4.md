@@ -93,7 +93,7 @@
         luisgen "CognitiveModels\kkbox.luis.json" -cs DemoBotApp.KKBoxRecognizerConvert
         ```
 
-        > 如果因環境關係無法順利運用 luisgen 產生 KKBoxRecognizerConvert，請由 [KKBoxRecognizerConvert.cs](code/KKBoxRecognizerConvert.cs) 取得   
+        > 如果因環境關係無法順利運用 luisgen 產生 KKBoxRecognizerConvert，請由 [KKBoxRecognizerConvert.cs](https://raw.githubusercontent.com/dinowang/HOL-INFL10/master/code/KKBoxRecognizerConvert.cs) 取得   
         > 可參考 <https://github.com/Microsoft/botbuilder-tools/issues/643>
 
 
