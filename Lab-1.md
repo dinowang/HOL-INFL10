@@ -63,9 +63,3 @@
 
 10. 執行 Bot Framework Emulator v4 (Preview), 驗證對話是否完成
 
-11. 在 Azure 中新增 Bot Service
-
-12. 新增連接 endpoint 到 bot file  
-   ```sh
-   msbot connect endpoint -n production -e https://xxx.azurewebsites.net/api/messages -a "appId" -p "appKey"
-   ```
