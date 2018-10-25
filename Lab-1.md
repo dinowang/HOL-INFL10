@@ -57,9 +57,9 @@
    [Startup.cs](code/Startup.cs)
 
 9.  執行 ASP.NET Core 應用程式
-   ```sh
-   dotnet run
-   ```
+    ```sh
+    dotnet run
+    ```
 
 10. 執行 Bot Framework Emulator v4 (Preview), 驗證對話是否完成
 
