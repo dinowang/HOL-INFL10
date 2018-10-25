@@ -49,6 +49,7 @@
     ```
 
     > 這邊使用 MemoryStorage, 但在 web apps 中建議用別的儲存機制 (ex: Microsoft.Bot.Builder.Azure.AzureBlobStorage) 達成持久狀態儲存  
+    
     > AddSingleton: 一旦實例化就不會回收, 運行期間都用同一個  
     > AddTransient: 每次注入都會產生一個實例  
     > AddScoped: 每次的請求都會只產生一個實例, 不同次的Request都會用不同的

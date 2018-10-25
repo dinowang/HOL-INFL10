@@ -170,7 +170,7 @@
 
     ```csharp
     // 省略
-        AddDialog (new NumberPrompt<int> ("age", AgeValidator));
+        AddDialog(new NumberPrompt<int>("age", AgeValidator));
         
     //省略
     private async Task<bool> AgeValidator (PromptValidatorContext<int> promptContext, CancellationToken cancellationToken)
